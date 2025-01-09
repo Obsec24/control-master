@@ -2,7 +2,7 @@ package traffic
 
 import (
 	"bytes"
-	. "control/common"
+	. "github.com/Obsec24/control-master/common"
 	"strings"
 )
 

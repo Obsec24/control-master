@@ -1,7 +1,7 @@
 package hashes
 
 import (
-	. "control/common"
+	. "github.com/Obsec24/control-master/common"
 	"encoding/json"
 	"fmt"
 	"net/http"

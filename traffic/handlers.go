@@ -1,7 +1,7 @@
 package traffic
 
 import (
-	. "control/common"
+	. "github.com/Obsec24/control-master/common"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
