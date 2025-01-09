@@ -11,7 +11,7 @@ import (
 )
 
 import (
-	"github.com/dan2ysgl/logrus"
+	"github.com/sirupsen/logrus"
   	"os"
 )
 
