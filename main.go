@@ -7,11 +7,11 @@ import (
 )
 
 import (
-	"./certs"
-	"./hashes"
-	"./libraries"
-	"./obfuscation"
-	"./traffic"
+    "github.com/Obsec24/control-master/certs"
+    "github.com/Obsec24/control-master/hashes"
+    "github.com/Obsec24/control-master/libraries"
+    "github.com/Obsec24/control-master/obfuscation"
+    "github.com/Obsec24/control-master/traffic"
 )
 
 func main() {
