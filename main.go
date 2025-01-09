@@ -7,11 +7,11 @@ import (
 )
 
 import (
-	"control-master/certs"
-	"control-master/hashes"
-	"control-master/libraries"
-	"control-master/obfuscation"
-	"control-master/traffic"
+	"./certs"
+	"./hashes"
+	"./libraries"
+	"./obfuscation"
+	"./traffic"
 )
 
 func main() {
