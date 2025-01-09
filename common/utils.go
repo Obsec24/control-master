@@ -11,8 +11,8 @@ import (
 )
 
 import (
-	"github.com/dan2ysgl/logrus"
-  	"os"
+	"github.com/sirupsen/logrus" // Utiliza el módulo correcto
+	"os"
 )
 
 //Configuring vars for logging
