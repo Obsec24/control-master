@@ -2,7 +2,7 @@
 
 import argparse
 import datetime
-import imp
+import importlib
 import os
 import sys
 import tarfile
@@ -13,13 +13,20 @@ import tools
 TOOLS_FILE = '/app/scripts/testing.config'
 # Logging init
 FILE_LOGS = '/app/logging/log/operation.privapp.log'
-HELPER_JSON_LOGGER = '/app/logging/agent/helper/log.py'
+HELPER_JSON_LOGGER = '/app/logging-master/agent/helper/log.py'
 DIR_OUTPUT = "/app/logging/log"
 SCREENSHOT_MANUAL_TIMEOUT = 10
+
 # configure json logger
-assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOGGER
-log = imp.load_source('log', HELPER_JSON_LOGGER)
-logger = log.init_logger(FILE_LOGS)
+
+log = importlib.util.spec_from_file_location("log", HELPER_JSON_LOGGER)
+log_module = importlib.util.module_from_spec(log)
+log.loader.exec_module(log_module)
+logger = log_module.init_logger(FILE_LOGS) 
+
+#assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOGGER
+#log = imp.load_source('log', HELPER_JSON_LOGGER)
+#logger = log.init_logger(FILE_LOGS)
 
 
 def parse_args():
