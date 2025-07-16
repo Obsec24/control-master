@@ -14,7 +14,7 @@ import tarfile
 TOOLS_FILE = '/app/scripts/testing.config'
 # Logging init
 FILE_LOGS = '/app/logging/log/operation.privapp.log'
-HELPER_JSON_LOGGER = '/app/logging/agent/helper/log.py'
+HELPER_JSON_LOGGER = '/app/logging-master/agent/helper/log.py'
 TERMINAL_PASSWORD = "5131"
 DIR_OUTPUT = "/app/logging/log"
 
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     tools.adb_shell(['su', '-c', '/data/local/frida-server'], retry_limit=0)
     # starting frida client
     (success, result) = tools.call_sh(
-        '/app/intercept/pinning/fridactl.py {} {} {} {} &'.format(device, app, testing_label, version), timeout_secs=10)
+        '/app/intercept-master/pinning/fridactl.py {} {} {} {} &'.format(device, app, testing_label, version), timeout_secs=10)
     if not success:
         logger.error('Fridactl start failed, pinning-protected traffic will not be captured',
                      extra={'testing_label': testing_label, 'apk': app, 'version': version, 'container': 'traffic',
