@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import time
 
 import tools
-import imp
+import importlib
 import os
 import argparse
 import sys
@@ -24,9 +24,16 @@ MITM_PROXY_START_ERROR = 30
 APK_NOT_FOUND = 50
 
 # configure json logger
-assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOGGER
-log = imp.load_source('log', HELPER_JSON_LOGGER)
-logger = log.init_logger(FILE_LOGS)
+log = importlib.util.spec_from_file_location("log", HELPER_JSON_LOGGER)
+log_module = importlib.util.module_from_spec(log)
+log.loader.exec_module(log_module)
+logger = log_module.init_logger(FILE_LOGS) 
+
+
+
+#assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOGGER
+#log = imp.load_source('log', HELPER_JSON_LOGGER)
+#logger = log.init_logger(FILE_LOGS)
 
 
 # logger.error("Google Play Authentication failure")
