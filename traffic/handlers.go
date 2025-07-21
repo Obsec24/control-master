@@ -286,3 +286,12 @@ func sanitize(res http.ResponseWriter, req *http.Request) {
 	send, _ := json.Marshal(resp{true, "Sanitization done", 0})
         fmt.Fprintf(res, string(send))
 }
+
+func printState(res http.ResponseWriter, label string) {
+	fmt.Fprintf(res, "\n[%s] Estado actual de variables globales:\n", label)
+	fmt.Fprintf(res, "  ip            = %s\n", ip)
+	fmt.Fprintf(res, "  name          = %s\n", name)
+	fmt.Fprintf(res, "  testing_label = %s\n", testing_label)
+	fmt.Fprintf(res, "  version       = %s\n", version)
+}
+
