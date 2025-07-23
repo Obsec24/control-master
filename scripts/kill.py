@@ -4,7 +4,7 @@ import tools
 import os 
 
 LOG_FILE='/app/logging/log/operation.privapp.log'
-HELPER_JSON_LOGGER = '/app/logging/agent/helper/log.py'
+HELPER_JSON_LOGGER = '/app/logging-master/agent/helper/log.py'
 
 #configure json logger
 assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOG
