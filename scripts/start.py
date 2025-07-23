@@ -167,18 +167,6 @@ if __name__ == '__main__':
         logger.debug('Mitmproxy start succesfully', extra={'testing_label': testing_label, 'apk': app,
                                                           'version': version, 'container': 'traffic', 'device': device})
     # starting frida server
-    tools.adb_shell(['su', '-c', '/data/local/frida-server'], retry_limit=0)
-    # starting frida client
-    (success, result) = tools.call_sh(
-        '/app/intercept-master/pinning/fridactl.py {} {} {} {} &'.format(device, app, testing_label, version), timeout_secs=10)
-    if not success:
-        logger.error('Fridactl start failed, pinning-protected traffic will not be captured',
-                     extra={'testing_label': testing_label, 'apk': app, 'version': version, 'container': 'traffic',
-                            'exception_message': result, 'device': device})
-    else:
-        logger.debug('Fridactl start successfully', extra={'testing_label': testing_label, 'apk': app,
-                                                        'version': version, 'container': 'traffic', 'device': device})
-
     # time.sleep(timeout // 3)
     # screen_file = os.path.join(data_dir,
     #                            '%s-%s-test-%s-fp-start.png' % (app, version, testing_label))
