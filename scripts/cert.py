@@ -5,7 +5,7 @@ import os
 
 #Logging init
 LOG_FILE = '/app/logging/log/operation.privapp.log'
-HELPER_JSON_LOGGER = '/app/logging/agent/helper/log.py'
+HELPER_JSON_LOGGER = '/app/logging-master/agent/helper/log.py'
 assert os.path.isfile(HELPER_JSON_LOGGER), '%s  is not a valid file or path to file' % HELPER_JSON_LOGGER
 log = imp.load_source('log', HELPER_JSON_LOGGER)
 logger =  log.init_logger(LOG_FILE)
