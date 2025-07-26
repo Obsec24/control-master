@@ -40,7 +40,6 @@ func config(res http.ResponseWriter, req *http.Request) {
 			name = tmp
 		}
 		InitLogger(name, ip, LOG_FILE, testing_label, version)
-		printState(res, "CONFIG")
 		Log("Configured => IP: " + ip + " Name: " + name)
 		send, _ := json.Marshal(resp{true, "Configured target device IP", 0})
 		fmt.Fprintf(res, string(send))
@@ -97,7 +96,6 @@ func upload(res http.ResponseWriter, req *http.Request) {
 		name = ApkName()
 		Log("Configured => Name: " + name)
 		InitLogger(name, ip, LOG_FILE, testing_label, version)
-		printState(res, "UPLOAD")
 		send, _ := json.Marshal(resp{true, "APK uploaded successfuly", 0})
 		fmt.Fprintf(res, string(send))
 		Logger.WithFields(StandardFields).Info("APK uploaded successfuly")
@@ -132,7 +130,6 @@ func phaseOne(res http.ResponseWriter, req *http.Request) {
 		if reboot == "True" {
 			args = append(args, "-r")
 		}
-		printState(res, "PHASE ONE")
 		exitcode := RunCommand("scripts/start.py", args...)
 		if exitcode == 0 {
 			send, _ := json.Marshal(resp{true, "Traffic capture in idle phase finished successfully", exitcode})
@@ -151,7 +148,6 @@ func phaseOne(res http.ResponseWriter, req *http.Request) {
 func phaseTwo(res http.ResponseWriter, req *http.Request) {
 	Log("Starting to capture traffic in phase II")
 	Command(nil, "mv", "output.log", "first.privapp.log")
-	printState(res, "PHASE TWO")
 	args := []string{"-d", ip, "-a", name, "-l", testing_label}
 	timeout := req.FormValue("timeout")
 	if timeout == "" {
@@ -291,13 +287,5 @@ func sanitize(res http.ResponseWriter, req *http.Request) {
 	InitLogger(name, ip, LOG_FILE, testing_label, version)
 	send, _ := json.Marshal(resp{true, "Sanitization done", 0})
         fmt.Fprintf(res, string(send))
-}
-
-func printState(res http.ResponseWriter, label string) {
-	fmt.Fprintf(res, "\n[%s] Estado actual de variables globales:\n", label)
-	fmt.Fprintf(res, "  ip            = %s\n", ip)
-	fmt.Fprintf(res, "  name          = %s\n", name)
-	fmt.Fprintf(res, "  testing_label = %s\n", testing_label)
-	fmt.Fprintf(res, "  version       = %s\n", version)
 }
 
