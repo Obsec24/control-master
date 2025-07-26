@@ -45,6 +45,8 @@ func config(res http.ResponseWriter, req *http.Request) {
 		send, _ := json.Marshal(resp{true, "Configured target device IP", 0})
 		fmt.Fprintf(res, string(send))
 		Logger.WithFields(StandardFields).Info("Target device IP configured")
+		fmt.Printf("Dispositivo configurado con los siguientes argumentos:\nName: %s\nIP: %s\nLog File: %s\nTesting Label: %s\nVersion: %s\n",
+			name, ip, LOG_FILE, testing_label, version)
 	}
 }
 
