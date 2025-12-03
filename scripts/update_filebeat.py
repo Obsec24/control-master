@@ -8,7 +8,7 @@ elasticsearch_host =os.getenv('ELASTICSEARCH_HOST')
 for l in lineas:
     if l == '  password: "epn.2025!"'+"\n":
         l = '  password: ' +'"'+ elasticsearch_password + '"'+ "\n"
-    if l == '  hosts: ["172.31.15.135:9200"]'+"\n":
+    if l == '  hosts: ["172.31.162.60:9200"]'+"\n":
         l = '  hosts: '+'["'+elasticsearch_host + '"]'+ "\n"
     f.write(l)
 f.close()
