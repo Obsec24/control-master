@@ -188,14 +188,14 @@ func analysis(res http.ResponseWriter, req *http.Request) {
 	csv, _ := os.OpenFile("logging/log/out.privapp.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
 	defer csv.Close()
 	if _, err := os.Stat("first.privapp.log"); err== nil{
-		Command(csv, "analyze-master/analyze.py", "first.privapp.log", "Phase 1", ip, name, testing_label, version)
+		Command(csv, "python3", "analyze-master/analyze.py", "first.privapp.log", "Phase 1", ip, name, testing_label, version)
 	} else if os.IsNotExist(err){
 		Logger.WithFields(StandardFields).Info("Traffic not generated in phase one.")
 	}else{
 		Logger.WithFields(StandardFields).Error("Error while opening phase-one traffic file!")
 	}
 	if _, err := os.Stat("second.privapp.log"); err== nil{
-		Command(csv, "analyze-master/analyze.py", "second.privapp.log", "Phase 2", ip, name, testing_label, version)
+		Command(csv, "python3", "analyze-master/analyze.py", "second.privapp.log", "Phase 2", ip, name, testing_label, version)
 	} else if os.IsNotExist(err){
 		Logger.WithFields(StandardFields).Info("Traffic not generated in phase two.")
 	}else{
